@@ -59,18 +59,18 @@ class Dataset(object):
             self.train_input_size = random.choice(self.train_input_sizes)
             self.train_output_sizes = self.train_input_size // self.strides
 
-            batch_image = np.zeros((self.batch_size, self.train_input_size, self.train_input_size, 3))
+            batch_image = np.zeros((self.batch_size, self.train_input_size, self.train_input_size, 3), dtype=np.float32)
 
             batch_label_sbbox = np.zeros((self.batch_size, self.train_output_sizes[0], self.train_output_sizes[0],
-                                          self.anchor_per_scale, 5 + self.num_classes))
+                                          self.anchor_per_scale, 5 + self.num_classes), dtype=np.float32)
             batch_label_mbbox = np.zeros((self.batch_size, self.train_output_sizes[1], self.train_output_sizes[1],
-                                          self.anchor_per_scale, 5 + self.num_classes))
+                                          self.anchor_per_scale, 5 + self.num_classes), dtype=np.float32)
             batch_label_lbbox = np.zeros((self.batch_size, self.train_output_sizes[2], self.train_output_sizes[2],
-                                          self.anchor_per_scale, 5 + self.num_classes))
+                                          self.anchor_per_scale, 5 + self.num_classes), dtype=np.float32)
 
-            batch_sbboxes = np.zeros((self.batch_size, self.max_bbox_per_scale, 4))
-            batch_mbboxes = np.zeros((self.batch_size, self.max_bbox_per_scale, 4))
-            batch_lbboxes = np.zeros((self.batch_size, self.max_bbox_per_scale, 4))
+            batch_sbboxes = np.zeros((self.batch_size, self.max_bbox_per_scale, 4), dtype=np.float32)
+            batch_mbboxes = np.zeros((self.batch_size, self.max_bbox_per_scale, 4), dtype=np.float32)
+            batch_lbboxes = np.zeros((self.batch_size, self.max_bbox_per_scale, 4), dtype=np.float32)
 
             num = 0
             if self.batch_count < self.num_batchs:
@@ -90,8 +90,11 @@ class Dataset(object):
                     batch_lbboxes[num, :, :] = lbboxes
                     num += 1
                 self.batch_count += 1
-                return batch_image, batch_label_sbbox, batch_label_mbbox, batch_label_lbbox, \
-                       batch_sbboxes, batch_mbboxes, batch_lbboxes
+                batch_smaller_target = batch_label_sbbox, batch_sbboxes
+                batch_medium_target  = batch_label_mbbox, batch_mbboxes
+                batch_larger_target  = batch_label_lbbox, batch_lbboxes
+
+                return batch_image, (batch_smaller_target, batch_medium_target, batch_larger_target)
             else:
                 self.batch_count = 0
                 np.random.shuffle(self.annotations)
@@ -157,14 +160,15 @@ class Dataset(object):
         image_path = line[0]
         if not os.path.exists(image_path):
             raise KeyError("%s does not exist ... " %image_path)
-        image = np.array(cv2.imread(image_path))
-        bboxes = np.array([list(map(lambda x: int(float(x)), box.split(','))) for box in line[1:]])
+        image = cv2.imread(image_path)
+        bboxes = np.array([list(map(int, box.split(','))) for box in line[1:]])
 
         if self.data_aug:
             image, bboxes = self.random_horizontal_flip(np.copy(image), np.copy(bboxes))
             image, bboxes = self.random_crop(np.copy(image), np.copy(bboxes))
             image, bboxes = self.random_translate(np.copy(image), np.copy(bboxes))
 
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image, bboxes = utils.image_preporcess(np.copy(image), [self.train_input_size, self.train_input_size], np.copy(bboxes))
         return image, bboxes
 

@@ -6,7 +6,7 @@
 #   Editor      : VIM
 #   File name   : utils.py
 #   Author      : YunYang1994
-#   Created date: 2019-02-28 13:14:19
+#   Created date: 2019-07-12 01:33:38
 #   Description :
 #
 #================================================================
@@ -15,8 +15,50 @@ import cv2
 import random
 import colorsys
 import numpy as np
-import tensorflow as tf
 from core.config import cfg
+
+def load_weights(model, weights_file):
+    """
+    I agree that this code is very ugly, but I don’t know any better way of doing it.
+    """
+    wf = open(weights_file, 'rb')
+    major, minor, revision, seen, _ = np.fromfile(wf, dtype=np.int32, count=5)
+
+    j = 0
+    for i in range(75):
+        conv_layer_name = 'conv2d_%d' %i if i > 0 else 'conv2d'
+        bn_layer_name = 'batch_normalization_%d' %j if j > 0 else 'batch_normalization'
+
+        conv_layer = model.get_layer(conv_layer_name)
+        filters = conv_layer.filters
+        k_size = conv_layer.kernel_size[0]
+        in_dim = conv_layer.input_shape[-1]
+
+        if i not in [58, 66, 74]:
+            # darknet weights: [beta, gamma, mean, variance]
+            bn_weights = np.fromfile(wf, dtype=np.float32, count=4 * filters)
+            # tf weights: [gamma, beta, mean, variance]
+            bn_weights = bn_weights.reshape((4, filters))[[1, 0, 2, 3]]
+            bn_layer = model.get_layer(bn_layer_name)
+            j += 1
+        else:
+            conv_bias = np.fromfile(wf, dtype=np.float32, count=filters)
+
+        # darknet shape (out_dim, in_dim, height, width)
+        conv_shape = (filters, in_dim, k_size, k_size)
+        conv_weights = np.fromfile(wf, dtype=np.float32, count=np.product(conv_shape))
+        # tf shape (height, width, in_dim, out_dim)
+        conv_weights = conv_weights.reshape(conv_shape).transpose([2, 3, 1, 0])
+
+        if i not in [58, 66, 74]:
+            conv_layer.set_weights([conv_weights])
+            bn_layer.set_weights(bn_weights)
+        else:
+            conv_layer.set_weights([conv_weights, conv_bias])
+
+    assert len(wf.read()) == 0, 'failed to read all data'
+    wf.close()
+
 
 def read_class_names(class_file_name):
     '''loads class name from a file'''
@@ -36,8 +78,6 @@ def get_anchors(anchors_path):
 
 
 def image_preporcess(image, target_size, gt_boxes=None):
-
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB).astype(np.float32)
 
     ih, iw    = target_size
     h,  w, _  = image.shape
@@ -114,19 +154,6 @@ def bboxes_iou(boxes1, boxes2):
     ious          = np.maximum(1.0 * inter_area / union_area, np.finfo(np.float32).eps)
 
     return ious
-
-
-
-def read_pb_return_tensors(graph, pb_file, return_elements):
-
-    with tf.gfile.FastGFile(pb_file, 'rb') as f:
-        frozen_graph_def = tf.GraphDef()
-        frozen_graph_def.ParseFromString(f.read())
-
-    with graph.as_default():
-        return_elements = tf.import_graph_def(frozen_graph_def,
-                                              return_elements=return_elements)
-    return return_elements
 
 
 def nms(bboxes, iou_threshold, sigma=0.3, method='nms'):
@@ -207,6 +234,7 @@ def postprocess_boxes(pred_bbox, org_img_shape, input_size, score_threshold):
     coors, scores, classes = pred_coor[mask], scores[mask], classes[mask]
 
     return np.concatenate([coors, scores[:, np.newaxis], classes[:, np.newaxis]], axis=-1)
+
 
 
 
