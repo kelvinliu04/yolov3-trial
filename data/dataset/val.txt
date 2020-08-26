@@ -1,0 +1,60 @@
+0 ./yolov3-trial/data/dataset/val\0.jpg 750 500 1 517 253 583 295
+1 ./yolov3-trial/data/dataset/val\102.jpg 259 194 1 155 91 182 100
+2 ./yolov3-trial/data/dataset/val\105.jpg 259 194 1 210 87 235 105
+3 ./yolov3-trial/data/dataset/val\114.jpg 768 432 1 150 207 206 238
+4 ./yolov3-trial/data/dataset/val\12.jpg 296 170 1 166 153 209 163
+5 ./yolov3-trial/data/dataset/val\120.jpg 500 500 1 174 338 298 377
+6 ./yolov3-trial/data/dataset/val\126.jpg 259 194 1 95 143 150 158
+7 ./yolov3-trial/data/dataset/val\129.jpg 700 465 1 445 230 522 263
+8 ./yolov3-trial/data/dataset/val\132.jpg 500 350 1 181 280 291 314
+9 ./yolov3-trial/data/dataset/val\135.jpg 259 194 1 201 118 227 138
+10 ./yolov3-trial/data/dataset/val\147.jpg 282 179 1 141 136 196 152
+11 ./yolov3-trial/data/dataset/val\15.jpg 388 691 1 156 385 252 419
+12 ./yolov3-trial/data/dataset/val\150.jpg 259 194 1 68 127 120 158
+13 ./yolov3-trial/data/dataset/val\153.jpg 768 432 1 464 337 591 405
+14 ./yolov3-trial/data/dataset/val\156.jpg 0 0 1 420 617 712 699
+15 ./yolov3-trial/data/dataset/val\159.jpg 611 410 1 396 244 500 284
+16 ./yolov3-trial/data/dataset/val\165.jpg 500 320 1 139 224 201 251
+17 ./yolov3-trial/data/dataset/val\168.jpg 700 464 1 105 256 158 275 1 333 164 366 177 1 524 283 602 307
+18 ./yolov3-trial/data/dataset/val\171.jpg 800 533 1 33 470 115 510 1 495 345 558 370
+19 ./yolov3-trial/data/dataset/val\174.jpg 0 0 1 290 270 397 368 1 455 170 523 222 1 555 161 624 225
+20 ./yolov3-trial/data/dataset/val\177.jpg 263 192 1 73 119 122 141 1 182 108 258 156 1 1 75 30 95
+21 ./yolov3-trial/data/dataset/val\18.jpg 644 361 1 81 123 109 132 1 300 174 328 189
+22 ./yolov3-trial/data/dataset/val\186.jpg 274 184 1 46 111 87 126 1 150 102 192 117
+23 ./yolov3-trial/data/dataset/val\189.jpg 225 225 1 36 59 124 98
+24 ./yolov3-trial/data/dataset/val\192.jpg 1024 757 1 435 528 482 549
+25 ./yolov3-trial/data/dataset/val\195.jpg 712 863 1 337 580 406 602
+26 ./yolov3-trial/data/dataset/val\198.jpg 750 500 1 175 422 235 449
+27 ./yolov3-trial/data/dataset/val\204.jpg 640 853 1 204 568 339 610
+28 ./yolov3-trial/data/dataset/val\213.jpg 0 0 1 393 549 459 580 1 115 441 140 457 1 195 432 214 445
+29 ./yolov3-trial/data/dataset/val\216.jpg 700 393 1 287 313 386 346
+30 ./yolov3-trial/data/dataset/val\219.jpg 237 212 1 158 159 192 176
+31 ./yolov3-trial/data/dataset/val\222.jpg 500 500 1 414 321 445 343 1 1 259 22 270
+32 ./yolov3-trial/data/dataset/val\24.jpg 225 225 1 32 105 60 119
+33 ./yolov3-trial/data/dataset/val\27.jpg 610 410 1 414 223 495 262
+34 ./yolov3-trial/data/dataset/val\3.jpg 275 183 1 114 86 142 98
+35 ./yolov3-trial/data/dataset/val\33.jpg 168 300 1 73 195 122 211
+36 ./yolov3-trial/data/dataset/val\343.jpg 665 374 1 126 343 171 359 1 477 185 514 201
+37 ./yolov3-trial/data/dataset/val\344.jpg 400 400 1 53 358 81 369 1 338 368 369 381
+38 ./yolov3-trial/data/dataset/val\345.jpg 700 393 1 424 320 520 350 1 5 330 89 359 1 221 187 245 197 1 194 180 209 187
+39 ./yolov3-trial/data/dataset/val\346.jpg 275 183 1 204 128 227 136 1 108 113 117 116 1 72 138 82 143 1 47 127 56 131
+40 ./yolov3-trial/data/dataset/val\347.jpg 600 400 1 226 214 296 240 1 505 190 545 204
+41 ./yolov3-trial/data/dataset/val\348.jpg 720 415 1 125 301 165 316 1 217 214 233 220 1 247 126 269 136 1 492 124 512 133 1 591 221 622 233
+42 ./yolov3-trial/data/dataset/val\349.jpg 670 335 1 456 277 511 295 1 135 189 158 199
+43 ./yolov3-trial/data/dataset/val\350.jpg 800 533 1 276 343 352 365 1 521 279 579 297 1 1 270 21 280
+44 ./yolov3-trial/data/dataset/val\36.jpg 384 216 1 57 177 92 200
+45 ./yolov3-trial/data/dataset/val\39.jpg 592 444 1 244 368 338 399
+46 ./yolov3-trial/data/dataset/val\45.jpg 620 356 1 408 164 487 194 1 90 97 115 105
+47 ./yolov3-trial/data/dataset/val\51.jpg 700 393 1 122 212 156 224 1 309 214 351 228 1 623 219 677 238
+48 ./yolov3-trial/data/dataset/val\57.jpg 728 450 1 400 255 476 286
+49 ./yolov3-trial/data/dataset/val\60.jpg 670 421 1 68 183 155 211 1 516 195 585 221
+50 ./yolov3-trial/data/dataset/val\63.jpg 1000 750 1 437 510 573 572
+51 ./yolov3-trial/data/dataset/val\66.jpg 700 393 1 496 351 555 388
+52 ./yolov3-trial/data/dataset/val\72.jpg 1040 780 1 600 536 753 587 1 199 368 245 382
+53 ./yolov3-trial/data/dataset/val\78.jpg 700 393 1 175 236 274 296
+54 ./yolov3-trial/data/dataset/val\81.jpg 640 393 1 182 280 272 323 1 393 203 423 217
+55 ./yolov3-trial/data/dataset/val\84.jpg 259 194 1 88 113 163 134
+56 ./yolov3-trial/data/dataset/val\87.jpg 298 169 1 81 161 126 168
+57 ./yolov3-trial/data/dataset/val\90.jpg 500 500 1 92 214 148 235
+58 ./yolov3-trial/data/dataset/val\96.jpg 259 194 1 48 99 78 112
+59 ./yolov3-trial/data/dataset/val\99.jpg 230 175 1 70 88 134 107
